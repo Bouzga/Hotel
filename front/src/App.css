@@ -1,109 +1,35 @@
-.item {
- /* padding: 40px 20px;*/
+/* App.css */
+
+/* ... (autres styles) ... */
+
+.carousel {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* Utiliser 100% de la hauteur disponible */
-}
-
-.item img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 0rem;
-  pointer-events: none;
-}
-
-
-.image-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start; /* Aligner les images en haut */
-  margin-top: 2rem;
-}
-
-.gallery-image {
-  width: 300px; /* Définissez la largeur souhaitée pour toutes les images */
-  height: 300px; /* Définissez la hauteur souhaitée pour toutes les images */
-  object-fit: cover; /* Ajuste la manière dont l'image est ajustée dans le conteneur */
-  margin: 0.5rem;
-  border-radius: 2rem;
-}
-
-
-.gallery-image {
-  transition: filter 0.3s ease-in-out;
-}
-
-.gallery-image.blur {
-  filter: blur(3px); /* Ajustez la valeur selon vos préférences */
-}
-
-
-
-/* .carousel-image {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 0rem;
-  pointer-events: none;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.carousel-text {
-  /*margin-top: 1rem;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-} */
-
-/* App.css */
-
-.inner-carousel {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 0rem;
-}
-/* App.css */
-
-.item.active {
-  width: 1000px;
-  height: 300px;
-}
-
-.carousel-image {
-  width: 100%;
-  height: 100%;
- /* object-fit: cover;*/
-}
-
-.carousel-text {
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-}
-
-
-
-/* App.css */
-
-.item.active {
-  width: 1000px;
-  height: 300px;
-}
-
-.image-overlay {
+  height: 400px; /* Hauteur souhaitée du carousel */
+  overflow: hidden;
   position: relative;
 }
 
-.carousel-image {
+.inner-carousel {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0rem;
 }
 
 .carousel-text {
@@ -119,20 +45,31 @@
   text-align: center;
 }
 
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
 
+.gallery-image {
+  width: 300px; /* Largeur souhaitée pour toutes les images de la galerie */
+  height: 300px; /* Hauteur souhaitée pour toutes les images de la galerie */
+  object-fit: cover;
+  margin: 0.5rem;
+  border-radius: 2rem;
+}
 
-/* App.css */
-
-/* ... autres styles ... */
-
-/* ... autres styles ... */
-
-/* ... autres styles ... */
+/* ... (autres styles) ... */
 
 .carousel-controls {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .carousel-control {
@@ -140,20 +77,18 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin: 0.2rem; /* Ajustez l'espace entre les flèches */
+  margin: 0.2rem;
 }
 
-/* Positionne les flèches sous l'image */
-.carousel .carousel-controls {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.carousel-control.left {
+  left: 1rem;
 }
 
-/* ... autres styles ... */
+.carousel-control.right {
+  right: 1rem;
+}
+
+/* ... (autres styles) ... */
 
 .carousel-lock {
   font-size: 1rem;
@@ -165,4 +100,3 @@
   border-radius: 0.5rem;
   margin-top: 1rem;
 }
-

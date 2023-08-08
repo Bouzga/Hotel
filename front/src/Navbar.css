@@ -1,23 +1,23 @@
 .navbar {
-    background-color: #333;
-    display: flex;
-    justify-content: flex-start; /* Alignement à gauche */
-    align-items: center;
-    padding: 15px;
-  }
-  
-  .nav-button {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    margin: 0 px;
-    outline: none;
-    transition: color 0.3s;
-  }
-  
-  .nav-button:hover {
-    color: #ffc107;
-  }
-  
+  background-color: #333;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 0 10px;
+  outline: none;
+  text-decoration: none; /* Remove text underline */
+  transition: color 0.3s;
+}
+
+.nav-button:hover {
+  color: #ffc107;
+}

@@ -30,28 +30,28 @@ public class SliderController {
     public List<SliderDto> getAllSliders() {
         return sliderService.getAllSliders();
     }
-
-    @PostMapping("/add")
-    public SliderDto addSlider(@RequestParam("text") String text, @RequestParam("image") MultipartFile image) {
-        String imagePath = saveImageToDatabase(image);
-        SliderDto sliderDto = new SliderDto();
-        sliderDto.setText(text);
-        sliderDto.setImg(imagePath);
-        return sliderService.addSlider(sliderDto);
-    }
-
+//
 //    @PostMapping("/add")
-//    public SliderDto addSlider(
-//            @RequestParam("nom") String nom, // Ajoutez le champ "nom"
-//            @RequestParam("text") String text,
-//            @RequestParam("image") MultipartFile image) {
+//    public SliderDto addSlider(@RequestParam("text") String text, @RequestParam("image") MultipartFile image) {
 //        String imagePath = saveImageToDatabase(image);
 //        SliderDto sliderDto = new SliderDto();
-//        sliderDto.setNom(nom); // Définissez le nom
 //        sliderDto.setText(text);
 //        sliderDto.setImg(imagePath);
 //        return sliderService.addSlider(sliderDto);
 //    }
+
+    @PostMapping("/add")
+    public SliderDto addSlider(
+            @RequestParam("nom") String nom,
+            @RequestParam("text") String text,
+            @RequestParam("image") MultipartFile image) {
+        String imagePath = saveImageToDatabase(image);
+        SliderDto sliderDto = new SliderDto();
+        sliderDto.setNom(nom);
+        sliderDto.setText(text);
+        sliderDto.setImg(imagePath);
+        return sliderService.addSlider(sliderDto);
+    }
 
 
     @DeleteMapping("delete/{id}")
@@ -65,21 +65,38 @@ public class SliderController {
     }
 
 
-    private String saveImageToDatabase(MultipartFile image) {
-        String uploadDirectory = "src/main/resources/images/slider/";
 
+//    private String saveImageToDatabase(MultipartFile image) {
+//        String uploadDirectory = "C:\\Users\\mount\\Desktop\\Hotel19\\front\\public\\images\\slider";
+//        try {
+//            String originalFileName = image.getOriginalFilename();
+//            String newFileName = System.currentTimeMillis() + "_" + originalFileName;
+//            Path filePath = Paths.get(uploadDirectory + newFileName);
+//            Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+//
+//            return  newFileName;
+//        } catch (IOException e) {
+//
+//            return null;
+//        }
+//    }
+
+
+    private String saveImageToDatabase(MultipartFile image) {
+        String uploadDirectory = "C:\\Users\\mount\\Desktop\\Hotel19\\front\\public\\images";
         try {
             String originalFileName = image.getOriginalFilename();
             String newFileName = System.currentTimeMillis() + "_" + originalFileName;
-            Path filePath = Paths.get(uploadDirectory + newFileName);
+            Path filePath = Paths.get(uploadDirectory, newFileName);
             Files.copy(image.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            return "/images/slider/" + newFileName; // Retournez le chemin relatif de l'image
+            return newFileName;
         } catch (IOException e) {
-            // Gérez les erreurs ici
+            e.printStackTrace();
             return null;
         }
     }
+
 
 
 

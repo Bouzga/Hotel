@@ -1,7 +1,8 @@
-
 import React, { useState } from 'react';
 import '../Navbar.css';
 import LoginModal from './LoginModal';
+import APropos from './APropos';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -14,9 +15,14 @@ function Navbar() {
     setIsLoginModalOpen(false);
   };
 
-  return (<nav className='navbar'>
-      <button className='nav-button'>À propos</button>
-      <button className='nav-button'>Accueil</button>
+  return (
+    <nav className='navbar'>
+      <Link to='/apropos' className='nav-button'>
+        À propos 
+      </Link>
+      <Link to='/' className='nav-button'>
+        Accueil
+      </Link>
       <button className='nav-button' onClick={openLoginModal}>
         Se connecter
       </button>

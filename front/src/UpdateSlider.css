@@ -1,0 +1,49 @@
+// UpdateSlider.css
+
+.update-slider {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-table {
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 800px;
+  margin: 20px;
+}
+
+.slider-table th, .slider-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.slider-table th {
+  background-color: #f2f2f2;
+}
+
+.slider-table img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}

@@ -13,7 +13,8 @@ function LoginModal({ isOpen, onClose }) {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
- const handleSubmit = async (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -28,8 +29,10 @@ function LoginModal({ isOpen, onClose }) {
       if (response.ok) {
         const data = await response.text();
         setMessage(data);
-        onClose();
- } else {
+
+        // Rediriger vers le composant "Admin" après une connexion réussie
+        window.location.href = '/admin';
+      } else {
         setMessage('Échec de l\'authentification !');
       }
     } catch (error) {
@@ -46,7 +49,7 @@ function LoginModal({ isOpen, onClose }) {
 
   useEffect(() => {
     if (!isOpen) {
-resetState();
+      resetState();
     }
   }, [isOpen]);
 
@@ -65,7 +68,7 @@ resetState();
           />
           <input
             type='password'
- placeholder='Mot de passe'
+            placeholder='Mot de passe'
             value={password}
             onChange={handlePasswordChange}
           />
