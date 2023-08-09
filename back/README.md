@@ -17,7 +17,7 @@ Ce projet est une application web développée avec Spring Boot qui gère l'auth
 
 ## Installation et exécution
 
-1. Clonez ce dépôt : `git clone https://github.com/votre-utilisateur/votre-projet.git`
+1. Clonez ce dépôt : `git clone https://github.com/votre-utilisateur/votre-projet.git](https://github.com/Bouzga/Hotel19.git`
 2. Accédez au répertoire du projet : `cd votre-projet`
 
 L'application sera accessible à l'adresse : `http://localhost:8080`
