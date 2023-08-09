@@ -19,14 +19,14 @@ function SliderRow({ slider, handleImageChange, handleFieldChange, saveChanges }
         <input
           type="text"
           value={slider.nom}
-          onChange={(e) => handleFieldChange(e, slider.id,'nom')}
+          onChange={(e) => handleFieldChange(e, slider.id, 'nom')}
         />
       </td>
       <td>
         <input
           type="text"
           value={slider.text}
-          onChange={(e) => handleFieldChange(e, slider.id,'text')}
+          onChange={(e) => handleFieldChange(e, slider.id, 'text')}
         />
       </td>
       <td>
@@ -38,21 +38,22 @@ function SliderRow({ slider, handleImageChange, handleFieldChange, saveChanges }
 
 function UpdateSlider() {
   const [sliders, setSliders] = useState([]);
+
   useEffect(() => {
     async function fetchSliders() {
       try {
         const response = await axios.get('http://localhost:8080/slider/all');
         setSliders(response.data);
       } catch (error) {
-        console.error("Erreur lors de la récupération des sliders:", error);
+        console.error('Erreur lors de la récupération des sliders:', error);
       }
     }
     fetchSliders();
   }, []);
 
   const handleFieldChange = (event, sliderId, field) => {
-    setSliders(prevSliders => {
-      return prevSliders.map(slider => {
+    setSliders((prevSliders) => {
+      return prevSliders.map((slider) => {
         if (slider.id === sliderId) {
           return { ...slider, [field]: event.target.value };
         }
@@ -60,17 +61,19 @@ function UpdateSlider() {
       });
     });
   };
+
   const handleImageChange = (event, sliderId) => {
-    const updatedSliders = sliders.map(slider => {
+    const updatedSliders = sliders.map((slider) => {
       if (slider.id === sliderId) {
         return { ...slider, img: event.target.files[0] };
       }
       return slider;
     });
-    setSliders(prevSliders => updatedSliders);
+    setSliders(updatedSliders);
   };
+
   const saveChanges = async (sliderId) => {
-    const sliderToUpdate = sliders.find(slider => slider.id === sliderId);
+    const sliderToUpdate = sliders.find((slider) => slider.id === sliderId);
     try {
       // Créer un objet FormData pour envoyer les données, y compris le fichier
       const formData = new FormData();
@@ -88,10 +91,10 @@ function UpdateSlider() {
         title: 'Succès',
         text: `Le slider "${sliderToUpdate.nom}" a été modifié avec succès !`,
         icon: 'success',
-        confirmButtonText: 'OK'
+        confirmButtonText: 'OK',
       });
     } catch (error) {
-      console.error("Erreur lors de la modification du slider:", error);
+      console.error('Erreur lors de la modification du slider:', error);
     }
   };
 
@@ -119,8 +122,8 @@ function UpdateSlider() {
                 handleImageChange={handleImageChange}
                 handleFieldChange={handleFieldChange}
                 saveChanges={saveChanges}
-              /> 
-               ))}
+              />
+            ))}
           </tbody>
         </table>
       </div>
