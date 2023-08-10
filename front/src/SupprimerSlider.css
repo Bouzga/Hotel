@@ -1,41 +1,80 @@
 .supprimer-slider {
-    text-align: center;
-    margin-top: 30px;
-  }
-  
-  .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .slider-table {
-    border-collapse: collapse;
-    width: 80%;
-    max-width: 800px;
-    margin: 20px;
-  }
-  
-  .slider-table th, .slider-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .slider-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .slider-table img {
-    max-width: 100px;
-    max-height: 100px;
-  }
-  
-  button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
+  text-align: center;
+  margin-top: 30px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-table {
+  border-collapse: collapse;
+  width: 80%;
+  max-width: 800px;
+  margin: 20px;
+}
+
+.slider-table th, .slider-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.slider-table th {
+  background-color: #f2f2f2;
+}
+
+.slider-table img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+/* ... (your existing CSS rules) ... */
+
+.slider-table img {
+  width: 50px; /* Adjust the width as needed */
+  height: 50px; /* Adjust the height as needed */
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.image-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  white-space: nowrap;
+  font-size: 12px; /* Adjust the font size as needed */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.slider-image-container:hover .image-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ... (your existing CSS rules) ... */

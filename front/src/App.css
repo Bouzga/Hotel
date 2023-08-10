@@ -1,12 +1,12 @@
 /* App.css */
 
-/* ... (autres styles) ... */
+/* ... (other styles) ... */
 
 .carousel {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px; /* Hauteur souhaitée du carousel */
+  height: 400px;
   overflow: hidden;
   position: relative;
 }
@@ -43,6 +43,8 @@
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
+  backdrop-filter: blur(5px); /* Ajoute un effet de flou au fond */
+  color:white; /* Change la couleur du texte en noir */
 }
 
 .image-gallery {
@@ -54,18 +56,16 @@
 }
 
 .gallery-image {
-  width: 300px; /* Largeur souhaitée pour toutes les images de la galerie */
-  height: 300px; /* Hauteur souhaitée pour toutes les images de la galerie */
+  width: 300px;
+  height: 300px;
   object-fit: cover;
   margin: 0.5rem;
   border-radius: 2rem;
 }
 
-/* ... (autres styles) ... */
-
 .carousel-controls {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Controls on the left and right sides */
   align-items: center;
   position: absolute;
   bottom: 0;
@@ -73,22 +73,14 @@
 }
 
 .carousel-control {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin: 0.2rem;
+  margin: 9rem;
 }
 
-.carousel-control.left {
-  left: 1rem;
-}
-
-.carousel-control.right {
-  right: 1rem;
-}
-
-/* ... (autres styles) ... */
+/* ... (other styles) ... */
 
 .carousel-lock {
   font-size: 1rem;

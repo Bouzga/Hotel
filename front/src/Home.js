@@ -13,7 +13,6 @@ function Home() {
 
   useEffect(() => {
     if (!carouselLocked) {
-      // Fetch sliders data from the Spring API
       axios
         .get('http://localhost:8080/slider/all')
         .then((response) => {
@@ -49,6 +48,21 @@ function Home() {
     return <div>Loading...</div>;
   }
 
+  if (sliders.length === 0) {
+    return (
+      <div className='app'>
+        <div className='carousel'>
+          <div className='inner-carousel'>
+            <div className='item empty'>
+              <p></p>
+            </div>
+          </div>
+        </div>
+        <LoginModal />
+      </div>
+    );
+  }
+
   const currentSlider = sliders[currentImageIndex];
 
   return (
@@ -62,13 +76,10 @@ function Home() {
             transition={{ opacity: { duration: 0.7 } }}
             style={{ width: '1400px', height: '400px' }}
           >
-
-
-          
             <img
-              src={process.env.PUBLIC_URL + '/images/' + currentSlider.img} // Use the image URL from the API
-              //alt={`carousel-img-${currentImageIndex}`}
+              src={process.env.PUBLIC_URL + '/images/' + currentSlider.img}
               className='carousel-image'
+              alt={`carousel-img-${currentImageIndex}`}
             />
             <p className='carousel-text'>{currentSlider.text}</p>
           </motion.div>
@@ -83,15 +94,6 @@ function Home() {
             </div>
           )}
         </motion.div>
-      </div>
-      <div className='image-gallery'>
-        {sliders.map((slider, index) => (
-          <img
-            key={index}
-            src={process.env.PUBLIC_URL + '/images/' + slider.img} // Use the image URL from the API
-            className='gallery-image'
-          />
-        ))}
       </div>
       <LoginModal />
     </div>

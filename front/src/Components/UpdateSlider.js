@@ -1,110 +1,93 @@
 import React, { useState, useEffect } from 'react';
-import '../UpdateSlider.css';
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import '../UpdateSlider.css';
 
-function SliderRow({ slider, handleImageChange, handleFieldChange, saveChanges }) {
-  return (
-    <tr key={slider.id}>
-      <td>
-        <img src={slider.img} alt={`Image ${slider.nom}`} />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleImageChange(e, slider.id)}
-        />
-      </td>
-      <td>
-        <input
-          type="text"
-          value={slider.nom}
-          onChange={(e) => handleFieldChange(e, slider.id, 'nom')}
-        />
-      </td>
-      <td>
-        <input
-          type="text"
-          value={slider.text}
-          onChange={(e) => handleFieldChange(e, slider.id, 'text')}
-        />
-      </td>
-      <td>
-        <button onClick={() => saveChanges(slider.id)}>Enregistrer</button>
-      </td>
-    </tr>
-  );
-}
-
-function UpdateSlider() {
-  const [sliders, setSliders] = useState([]);
+const UpdateSlider = () => {
+  const [sliderData, setSliderData] = useState([]);
+  const [originalSliderData, setOriginalSliderData] = useState([]);
 
   useEffect(() => {
-    async function fetchSliders() {
-      try {
-        const response = await axios.get('http://localhost:8080/slider/all');
-        setSliders(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des sliders:', error);
-      }
-    }
-    fetchSliders();
+    axios.get('http://localhost:8080/slider/all')
+      .then(response => {
+        setSliderData(response.data);
+        setOriginalSliderData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching slider data:', error);
+      });
   }, []);
 
-  const handleFieldChange = (event, sliderId, field) => {
-    setSliders((prevSliders) => {
-      return prevSliders.map((slider) => {
-        if (slider.id === sliderId) {
-          return { ...slider, [field]: event.target.value };
-        }
-        return slider;
+  const handleSave = (idSlider) => {
+    const sliderToUpdate = sliderData.find(slider => slider.idSlider === idSlider);
+
+    axios.put(`http://localhost:8080/slider/update/${idSlider}`, sliderToUpdate)
+      .then(response => {
+        console.log('Slider updated successfully:', response.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Mise à jour réussie',
+          text: 'Les modifications ont été enregistrées avec succès.',
+        });
+      })
+      .catch(error => {
+        console.error('Error updating slider:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur de mise à jour',
+          text: 'Une erreur est survenue lors de la mise à jour. Veuillez réessayer.',
+        });
       });
-    });
   };
 
-  const handleImageChange = (event, sliderId) => {
-    const updatedSliders = sliders.map((slider) => {
-      if (slider.id === sliderId) {
-        return { ...slider, img: event.target.files[0] };
+  const handleFieldChange = (idSlider, field, value) => {
+    const updatedData = sliderData.map(slider => {
+      if (slider.idSlider === idSlider) {
+        return {
+          ...slider,
+          [field]: value
+        };
       }
       return slider;
     });
-    setSliders(updatedSliders);
+
+    setSliderData(updatedData);
   };
 
-  const saveChanges = async (sliderId) => {
-    const sliderToUpdate = sliders.find((slider) => slider.id === sliderId);
-    try {
-      // Créer un objet FormData pour envoyer les données, y compris le fichier
-      const formData = new FormData();
-      formData.append('nom', sliderToUpdate.nom);
-      formData.append('text', sliderToUpdate.text);
-      formData.append('img', sliderToUpdate.img);
+  const handleFileChange = (idSlider, file) => {
+    const updatedData = sliderData.map(slider => {
+      if (slider.idSlider === idSlider) {
+        return {
+          ...slider,
+          img: URL.createObjectURL(file)
+        };
+      }
+      return slider;
+    });
 
-      await axios.put(`http://localhost:8080/slider/update/${sliderId}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      // Afficher une alerte de succès
-      Swal.fire({
-        title: 'Succès',
-        text: `Le slider "${sliderToUpdate.nom}" a été modifié avec succès !`,
-        icon: 'success',
-        confirmButtonText: 'OK',
-      });
-    } catch (error) {
-      console.error('Erreur lors de la modification du slider:', error);
-    }
+    setSliderData(updatedData);
+  };
+
+  const handleCancel = (idSlider) => {
+    const originalSlider = originalSliderData.find(slider => slider.idSlider === idSlider);
+    const updatedData = sliderData.map(slider => {
+      if (slider.idSlider === idSlider) {
+        return {
+          ...slider,
+          nom: originalSlider.nom,
+          text: originalSlider.text
+        };
+      }
+      return slider;
+    });
+
+    setSliderData(updatedData);
   };
 
   return (
-    <div className="update-slider">
-      <div className="center-content">
-        <h2>Modifier un Slider</h2>
-        <p>Vous pouvez modifier les champs des sliders ci-dessous :</p>
-      </div>
-      <div className="table-container">
+    <div className="slider-container">
+      <h2 className="slider-title">Update Slider</h2>
+      <div className="slider-table-container">
         <table className="slider-table">
           <thead>
             <tr>
@@ -115,20 +98,40 @@ function UpdateSlider() {
             </tr>
           </thead>
           <tbody>
-            {sliders.map((slider) => (
-              <SliderRow
-                key={slider.id}
-                slider={slider}
-                handleImageChange={handleImageChange}
-                handleFieldChange={handleFieldChange}
-                saveChanges={saveChanges}
-              />
+            {sliderData.map(slider => (
+              <tr key={slider.idSlider}>
+                <td><img src={slider.img} alt={slider.nom} />
+                <input
+                    type="file"
+                    onChange={(e) => handleFileChange(slider.idSlider, e.target.files[0])}
+                  /></td>
+                <td>
+                  <input
+                    className="slider-input"
+                    type="text"
+                    value={slider.nom}
+                    onChange={(e) => handleFieldChange(slider.idSlider, 'nom', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <textarea
+                    className="slider-input"
+                    value={slider.text}
+                    onChange={(e) => handleFieldChange(slider.idSlider, 'text', e.target.value)}
+                  />
+                </td>
+                <td>
+               
+                  <button className="slider-button slider-button-adjusted same-size-button" onClick={() => handleSave(slider.idSlider)}>Enregistrer</button>
+                  <button className="slider-button slider-button-adjusted same-size-button" onClick={() => handleCancel(slider.idSlider)}>Annuler</button>
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
       </div>
     </div>
   );
-}
+};
 
 export default UpdateSlider;

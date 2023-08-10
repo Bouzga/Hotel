@@ -61,7 +61,7 @@ public class SliderController {
 
     @PutMapping("update/{id}")
     public SliderDto updateSlider(@PathVariable long id, @RequestBody SliderDto sliderDto) {
-        return sliderService.updateSlider(id, sliderDto);
+        return sliderService.updateSlider(id,sliderDto);
     }
 
 

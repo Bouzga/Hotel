@@ -1,33 +1,85 @@
-// UpdateSlider.css
-
-.update-slider {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.center-content {
+/* Styles for centering content */
+.slider-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Styles for the title */
+.slider-title {
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
-.table-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Styles for the table container */
+.slider-table-container {
+  width: 100%;
+  max-width: 800px;
+  overflow-x: auto;
 }
 
+/* Styles for the table */
 .slider-table {
+  width: 100%;
   border-collapse: collapse;
-  width: 80%;
-  max-width: 800px;
+  border: 1px solid #ccc;
+}
+
+/* Styles for the table cells */
+.slider-table th,
+.slider-table td {
+  padding: 20px 50px;
+  border: 1px solid #ccc;
+}
+
+/* Styles for the input fields */
+.slider-input {
+  width: 100%;
+  padding: 20px;
+  margin: 2px 0;
+  box-sizing: border-box;
+}
+
+/* Styles for the buttons */
+.slider-button {
+  background-color: green;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Adjusted button style for uniform size */
+.slider-button-adjusted {
+  padding: 8px 12px;
+  margin: 2px;
+}
+
+/* Same size for both buttons */
+.same-size-button {
+  width: 100px; /* You can adjust the width as needed */
+}
+/* UpdateSlider.css */
+.slider-container {
   margin: 20px;
 }
 
-.slider-table th, .slider-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+.slider-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.slider-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+.slider-table th,
+.slider-table td {
+  padding: 10px;
   text-align: center;
 }
 
@@ -35,15 +87,43 @@
   background-color: #f2f2f2;
 }
 
-.slider-table img {
-  max-width: 100px;
-  max-height: 100px;
+.slider-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-button {
-  background-color: #4CAF50;
-  color: white;
+.slider-button {
+  padding: 8px 12px;
   border: none;
-  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
+  margin-right: 5px;
 }
+
+.slider-button-adjusted {
+  background-color: #007bff;
+  color: white;
+}
+
+.same-size-button {
+  width: 80px;
+}
+
+/* Add styling for file input */
+.slider-file-input {
+  display: block;
+  margin-top: 5px;
+}
+
+/* Adjust styling for textarea */
+.slider-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+/* Adjust other styles as needed */

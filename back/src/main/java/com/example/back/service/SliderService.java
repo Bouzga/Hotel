@@ -44,6 +44,7 @@ public class SliderService {
             slider.setImg(sliderDto.getImg());
             slider.setText(sliderDto.getText());
             sliderRepository.save(slider);
+
             return mapToDto(slider);
         } else {
             return null; // Slider avec l'ID donné non trouvé
